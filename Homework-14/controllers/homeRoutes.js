@@ -2,7 +2,6 @@ const router = require("express").Router();
 const { Post, User, Comment } = require("../models");
 const isAuth = require("../utils/auth");
 
-//login handler
 router.get("/login", (req, res) => {
     if (req.session.loggedIn) {
         res.redirect("/");
@@ -10,8 +9,6 @@ router.get("/login", (req, res) => {
         res.render("login");
     }
 });
-
-//get all posts
 router.get("/", async (req, res) => {
     console.log("get all posts")
     try {
@@ -36,9 +33,7 @@ router.get("/", async (req, res) => {
     }
 });
 
-//get a specific post
 router.get("/post/:id", async (req, res) => {
-    //check for login
     if (req.session.loggedIn = false) {
         res.redirect("/login")
     } else {

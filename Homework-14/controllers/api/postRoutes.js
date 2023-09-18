@@ -2,13 +2,11 @@ const router = require('express').Router();
 const { Post } = require('../../models');
 const isAuth = require("../../utils/auth");
 
-//render post page
 router.get("/", async (req, res) => {
   const post = { name: "", content: "" }
   res.render("editpost", { post, newPost: true, loggedIn: req.session.loggedIn });
 });
 
-//create a post
 router.post('/', async (req, res) => {
   try {
     const newPost = await Post.create({
@@ -21,10 +19,6 @@ router.post('/', async (req, res) => {
     res.status(400).json(err);
   }
 });
-
-//update a post
-
-//delete a post
 router.delete('/:id',isAuth, async (req, res) => {
   try {
     const postData = await Post.destroy({
